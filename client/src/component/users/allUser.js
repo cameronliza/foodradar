@@ -12,12 +12,18 @@ const AllProfiles = () => {
   const userItem = loading ? (
     <p>...loading</p>
   ) : (
-    users.users.map((item, i) => <p key={i}>{item.username}</p>)
+    users.users.map((item, i) => (
+      <div>
+        <img src={item.avatar} style={{ height: "200px", width: "200px" }} />
+        <p key={i}>{item.username}</p>
+      </div>
+    ))
   );
+
   return (
     <div>
       <p>get users </p>
-      {/* {loading ? <p>...loading</p> : { userItem }} */}
+
       {userItem}
     </div>
   );
