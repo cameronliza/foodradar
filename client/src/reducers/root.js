@@ -1,6 +1,4 @@
-const { combineReducers } = require("redux");
-const user = require("./user");
+import { combineReducers } from "redux";
+import user from "./user";
 
-const rootReducer = combineReducers({ user });
-
-module.exports = rootReducer;
+export default combineReducers({ user });

@@ -5,7 +5,7 @@ const initialState = {
   users: [],
 };
 
-export default function user(state = initialState, action) {
+export default function User(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case "LOAD_USER":
