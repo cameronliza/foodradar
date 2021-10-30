@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { loadUser } from "../../actions/auth";
+import { loadUser } from "../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 
-const Privateroutte = ({ component: Component, ...rest }) => {
+const Privateroute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.user);
   const { isAuth, loading } = auth;
   useEffect(() => {
     dispatch(loadUser());
@@ -26,4 +26,4 @@ const Privateroutte = ({ component: Component, ...rest }) => {
     />
   );
 };
-export default Privateroutte;
+export default Privateroute;
