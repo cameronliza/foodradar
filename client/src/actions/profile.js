@@ -1,7 +1,7 @@
 import api from "../utils/api";
 
 export const getProfile = (userId) => async (dispatch) => {
-  const res = await api.get(`profile/${userId}`);
+  const res = await api.get(`/profile/${userId}`);
 
   dispatch({
     type: "GET_PROFILE",
@@ -10,7 +10,7 @@ export const getProfile = (userId) => async (dispatch) => {
 };
 
 export const setProfile = (FormData) => async (dispatch) => {
-  const res = await api.post("/", FormData, { withCredentials: true });
+  const res = await api.post("/profile", FormData, { withCredentials: true });
 
   dispatch({
     type: "SET_PROFILE",
@@ -19,7 +19,7 @@ export const setProfile = (FormData) => async (dispatch) => {
 };
 
 export const deleteAccount = () => async (dispatch) => {
-  const res = await api.delete("/", { withCredentials: true });
+  const res = await api.delete("/profile", { withCredentials: true });
 
   dispatch({
     type: "DELETE_PROFILE",

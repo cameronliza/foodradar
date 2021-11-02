@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getProfile } from "../../actions/profile";
+import { setProfile } from "../../actions/profile";
 
 const Profileform = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Profileform = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getProfile(data));
+    dispatch(setProfile(data));
   };
   return (
     <div>
