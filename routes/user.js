@@ -47,6 +47,7 @@ router.post("/login", (req, res, next) => {
       if (err) {
         return res.status(400).json({ errors: err });
       }
+      //add jwt sign here
       return res.status(200).json({ success: `logged in ${user.username}` });
     });
   })(req, res, next);
@@ -60,6 +61,7 @@ router.get("/isAuth", ensureAuthenticated, (req, res) => {
 
 //LOGOUT
 router.get("/logout", (req, res) => {
+  //on the client side it would reomve the jwt token and
   req.session.destroy();
   res.send("signed out");
 });

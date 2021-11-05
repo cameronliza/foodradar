@@ -41,6 +41,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.use(function (req, res, next) {
+//   res.locals.currentUser = req.user.username;
+//   // res.locals.error = req.flash("error");
+//   // res.locals.success = req.flash("success");
+//   next();
+// });
+
 //routes
 app.use("/user", require("./routes/user"));
 app.use("/profile", require("./routes/profile"));
