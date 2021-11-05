@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require("../config/auth");
+// const { ensureAuthenticated } = require("../config/auth");
+const auth = require("../config/auth");
 
 const Profile = require("../models/profile");
 const User = require("../models/user");
@@ -42,7 +43,7 @@ router.get("/:id", async (req, res) => {
 // });
 
 // POST - craete/update - private
-router.post("/", ensureAuthenticated, async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { lifestyle, ...rest } = req.body;
   const profileField = {
     user: req.user.id,
@@ -60,7 +61,7 @@ router.post("/", ensureAuthenticated, async (req, res) => {
 });
 
 //delete - private , deletes users,reviews, posts, profile
-router.delete("/", ensureAuthenticated, async (req, res) => {
+router.delete("/", auth, async (req, res) => {
   try {
     await Promise.all([
       Profile.findOneAndRemove({ user: req.user.id }),

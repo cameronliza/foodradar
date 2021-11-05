@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const { ensureAuthenticated } = require("../config/auth");
+const jwt = require("jsonwebtoken");
+// const { ensureAuthenticated } = require("../config/auth");
+const auth = require("../config/auth");
+const config = require("../config/default.json");
 
 const User = require("../models/user");
 
@@ -48,13 +51,23 @@ router.post("/login", (req, res, next) => {
         return res.status(400).json({ errors: err });
       }
       //add jwt sign here
+      const payload = { user: { id: user.id } };
+      jwt.sign(
+        payload,
+        config.jwtSecret,
+        { expiresIn: "1 day" },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
       return res.status(200).json({ success: `logged in ${user.username}` });
     });
   })(req, res, next);
 });
 
 //check if auth
-router.get("/isAuth", ensureAuthenticated, (req, res) => {
+router.get("/isAuth", auth, (req, res) => {
   res.json({ isAuth: true, user: req.user });
   // res.send("is auth");
 });

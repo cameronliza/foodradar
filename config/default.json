@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://nafisa:nafisa@cluster0.6nnwv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://nafisa:nafisa@cluster0.6nnwv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "A secret is here"
 }
