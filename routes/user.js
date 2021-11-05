@@ -52,16 +52,11 @@ router.post("/login", (req, res, next) => {
       }
       //add jwt sign here
       const payload = { user: { id: user.id } };
-      jwt.sign(
-        payload,
-        config.jwtSecret,
-        { expiresIn: "1 day" },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-      return res.status(200).json({ success: `logged in ${user.username}` });
+      jwt.sign(payload, config.jwtSecret, { expiresIn: "1m" }, (err, token) => {
+        if (err) throw err;
+        res.json({ token, payload });
+      });
+      // return res.status(200).json({ success: `logged in ${user.username}` });
     });
   })(req, res, next);
 });
@@ -79,4 +74,24 @@ router.get("/logout", (req, res) => {
   res.send("signed out");
 });
 
+//new jwt token
+
+router.get("/newtoken", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ msg: "Token is not valid" });
+  }
+  const payload = { user: { id: req.user.id } };
+  jwt.sign(payload, config.jwtSecret, { expiresIn: "5m" }, (err, token) => {
+    if (err) throw err;
+    res.json({ token });
+  });
+});
+// router.get("/newtoken", async (req, res) => {
+//   // const payload = { user: { id: user.id } };
+//   // jwt.sign(payload, config.jwtSecret, { expiresIn: "5m" }, (err, token) => {
+//   //   if (err) throw err;
+//   //   res.json({ token });
+//   // });
+//   res.json({ msg: "newtoken route", user: req.user.id });
+// });
 module.exports = router;
