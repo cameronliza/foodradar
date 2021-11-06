@@ -1,14 +1,15 @@
 import api from "./api";
 
-const setAuthToken = (token) => {
-  if (token) {
-    api.defaults.headers.common["x-auth-token"] = token;
-    console.log(token);
-    localStorage.setItem("token", token);
+const setAuthToken = (info) => {
+  if (info) {
+    // api.defaults.headers.common["x-auth-info"] = info;
+    // console.log(info);
+    const data = JSON.stringify(info);
+    localStorage.setItem("session", data);
   } else {
-    delete api.defaults.headers.common["x-auth-token"];
-    console.log("remove");
-    //   localStorage.removeItem("token");
+    // delete api.defaults.headers.common["x-auth-info"];
+    // console.log("remove");
+    localStorage.removeItem("session");
   }
 };
 

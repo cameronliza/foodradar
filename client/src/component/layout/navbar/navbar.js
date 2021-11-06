@@ -235,7 +235,6 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <AccountCircle />
-              <p>{user.username}</p>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -249,6 +248,7 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
+            <p>{user.userDetail?.username}</p>
           </Box>
         </Toolbar>
       </AppBar>

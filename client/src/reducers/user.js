@@ -1,5 +1,6 @@
+const local = localStorage.getItem("session");
 const initialState = {
-  token: localStorage.getItem("token"),
+  userDetail: JSON.parse(local),
   isAuth: false,
   loading: true,
   user: null,
@@ -20,7 +21,7 @@ export default function User(state = initialState, action) {
     case "LOGOUT":
       return {
         ...state,
-        token: null,
+        userDetail: null,
         isAuth: false,
         user: null,
         loading: false,

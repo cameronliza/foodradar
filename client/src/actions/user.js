@@ -1,9 +1,12 @@
 import api from "../utils/api";
+import setAuthToken from "../utils/setAuthToken";
 
 //check out if the user has auth
 export const loadUser = () => async (dispatch) => {
   try {
     const res = await api.get("/user/isAuth", { withCredentials: true });
+    const sessionObject = { username: res.data.username, id: res.data.id };
+    setAuthToken(sessionObject);
     dispatch({
       type: "LOAD_USER",
       payload: res.data,

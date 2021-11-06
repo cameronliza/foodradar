@@ -3,8 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-// const { ensureAuthenticated } = require("../config/auth");
-const auth = require("../config/auth");
+const { ensureAuthenticated } = require("../config/auth");
+// const auth = require("../config/auth");
 const config = require("../config/default.json");
 
 const User = require("../models/user");
@@ -51,24 +51,24 @@ router.post("/login", (req, res, next) => {
         return res.status(400).json({ errors: err });
       }
       //add jwt sign here
-      const payload = { user: { id: user.id } };
-      jwt.sign(
-        payload,
-        config.jwtSecret,
-        { expiresIn: "10m" },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-      // return res.status(200).json({ success: `logged in ${user.username}` });
+      // const payload = { user: { id: user.id } };
+      // jwt.sign(
+      //   payload,
+      //   config.jwtSecret,
+      //   { expiresIn: "10m" },
+      //   (err, token) => {
+      //     if (err) throw err;
+      //     res.json({ token });
+      //   }
+      // );
+      return res.status(200).json({ success: `logged in ${user.username}` });
     });
   })(req, res, next);
 });
 
 //check if auth
-router.get("/isAuth", auth, (req, res) => {
-  res.json({ isAuth: true, user: req.user });
+router.get("/isAuth", ensureAuthenticated, (req, res) => {
+  res.json({ isAuth: true, username: req.user.username, id: req.user.id });
   // res.send("is auth");
 });
 
@@ -81,16 +81,16 @@ router.get("/logout", (req, res) => {
 
 //new jwt token
 
-router.get("/newtoken", async (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({ msg: "Token is not valid" });
-  }
-  const payload = { user: { id: req.user.id } };
-  jwt.sign(payload, config.jwtSecret, { expiresIn: "5m" }, (err, token) => {
-    if (err) throw err;
-    res.json({ token });
-  });
-});
+// router.get("/newtoken", async (req, res) => {
+//   if (!req.user) {
+//     return res.status(401).json({ msg: "Token is not valid" });
+//   }
+//   const payload = { user: { id: req.user.id } };
+//   jwt.sign(payload, config.jwtSecret, { expiresIn: "5m" }, (err, token) => {
+//     if (err) throw err;
+//     res.json({ token });
+//   });
+// });
 // router.get("/newtoken", async (req, res) => {
 //   // const payload = { user: { id: user.id } };
 //   // jwt.sign(payload, config.jwtSecret, { expiresIn: "5m" }, (err, token) => {
