@@ -52,10 +52,15 @@ router.post("/login", (req, res, next) => {
       }
       //add jwt sign here
       const payload = { user: { id: user.id } };
-      jwt.sign(payload, config.jwtSecret, { expiresIn: "1m" }, (err, token) => {
-        if (err) throw err;
-        res.json({ token, payload });
-      });
+      jwt.sign(
+        payload,
+        config.jwtSecret,
+        { expiresIn: "10m" },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
       // return res.status(200).json({ success: `logged in ${user.username}` });
     });
   })(req, res, next);

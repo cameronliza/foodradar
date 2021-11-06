@@ -56,7 +56,7 @@ module.exports = function (req, res, next) {
   // }
   if (!token && req.isAuthenticated()) {
     // console.log("hell");
-    const payload = { user: { id: user.id } };
+    const payload = { user: { id: req.user.id } };
     jwt.sign(payload, config.jwtSecret, { expiresIn: "1m" }, (err, token) => {
       if (err) throw err;
 
@@ -65,19 +65,13 @@ module.exports = function (req, res, next) {
       // next();
     });
   }
-  // else {
-  //   return res
-  //     .status(401)
-  //     .json({ msg: "No token or cookie, authorization denied" });
-  // }
 
   // Verify token
   try {
     jwt.verify(token, config.jwtSecret, (error, decoded) => {
       if (error) {
-        // console.log(error);
+        console.log("jwt verfiy error", error);
         return res.redirect("/user/newtoken");
-        // return res.status(401).json({ msg: "Token is not valid" });
       } else {
         console.log(token);
         req.user = decoded.user;

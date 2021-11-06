@@ -1,4 +1,5 @@
 const initialState = {
+  token: localStorage.getItem("token"),
   isAuth: false,
   loading: true,
   user: null,
@@ -17,7 +18,13 @@ export default function User(state = initialState, action) {
       return { ...state, users: payload, loading: false };
     case "AUTH_ERROR":
     case "LOGOUT":
-      return { ...state, isAuth: false, user: null, loading: false };
+      return {
+        ...state,
+        token: null,
+        isAuth: false,
+        user: null,
+        loading: false,
+      };
     default:
       return state;
   }
