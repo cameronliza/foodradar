@@ -5,6 +5,7 @@ import Navbar from "./component/layout/navbar/navbar";
 import { useDispatch } from "react-redux";
 import { logout, loadUser } from "./actions/user";
 import setAuthToken from "./utils/setAuthToken";
+import Container from "@mui/material/Container";
 
 import "./App.css";
 function App() {
@@ -25,7 +26,9 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <Route component={Routes} />
+        <Container maxWidth="lg" className="cont">
+          <Route component={Routes} />
+        </Container>
       </Router>
     </div>
   );

@@ -9,7 +9,7 @@ export default function Profile(state = initialState, action) {
   switch (type) {
     case "GET_PROFILE":
     case "SET_PROFILE":
-      return { ...state, user: payload, loading: false };
+      return { ...state, profile: payload, loading: false };
     case "DELETE_PROFILE":
       return { ...state, profile: null, loading: false };
     default:

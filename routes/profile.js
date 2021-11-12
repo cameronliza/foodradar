@@ -19,7 +19,9 @@ router.get("/", async (req, res) => {
 //get- show specific profile
 
 router.get("/:id", async (req, res) => {
-  const profile = await Profile.findById(req.params.id).populate("user");
+  // const profile = await Profile.findById(req.params.id).populate("user");
+  const profile = await Profile.findOne({ user: req.params.id })
+  .populate("user", ["avatar", "username"]);
   //show revies. list and followers/following etc
   if (!profile) {
     return res.status(400).json({ msg: "No profile available" });

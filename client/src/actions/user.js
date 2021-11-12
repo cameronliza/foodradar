@@ -5,7 +5,11 @@ import setAuthToken from "../utils/setAuthToken";
 export const loadUser = () => async (dispatch) => {
   try {
     const res = await api.get("/user/isAuth", { withCredentials: true });
-    const sessionObject = { username: res.data.username, id: res.data.id };
+    const sessionObject = {
+      username: res.data.username,
+      id: res.data.id,
+      avatar: res.data.avatar,
+    };
     setAuthToken(sessionObject);
     dispatch({
       type: "LOAD_USER",

@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/user";
+import { Link } from "react-router-dom";
+// import { Block } from "@mui/icons-material";
 const Home = () => {
   const dispatch = useDispatch();
+
   const [cookies, setcookies] = useState("");
-  // function getCookie(cookieName) {
-  //   let cookie = {};
-  //   document.cookie.split(";").forEach(function (el) {
-  //     let [key, value] = el.split("=");
-  //     cookie[key.trim()] = value;
-  //   });
-  //   // setcookie(cook)
-  //   return cookie[cookieName];
+
   // }
   const handleChange = () => {
     dispatch(logout());
   };
   return (
-    <div>
+    <div style={{ display: "inline-grid" }}>
       Home page
-      <button onClick={handleChange}>logout</button>
+      <button onClick={handleChange} style={{ width: "360px" }}>
+        logout
+      </button>
+      <Link to="/login">Login</Link>
     </div>
   );
 };

@@ -68,7 +68,12 @@ router.post("/login", (req, res, next) => {
 
 //check if auth
 router.get("/isAuth", ensureAuthenticated, (req, res) => {
-  res.json({ isAuth: true, username: req.user.username, id: req.user.id });
+  res.json({
+    isAuth: true,
+    username: req.user.username,
+    id: req.user.id,
+    avatar: req.user.avatar,
+  });
   // res.send("is auth");
 });
 

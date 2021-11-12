@@ -18,6 +18,10 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import TemporaryDrawer from "./drawer";
 import { useSelector } from "react-redux";
 
+import AddIcon from "@mui/icons-material/Add";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -60,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const user = useSelector((state) => state.user);
-
+  const { isAuth, userDetail } = user;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -90,6 +94,24 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const loginOrUser = isAuth ? (
+    <>
+      <IconButton>
+        <AddIcon />
+      </IconButton>
+      <IconButton>
+        <NotificationsIcon />
+      </IconButton>
+      <IconButton>
+        <Avatar src={userDetail.avatar} sx={{ width: 24, height: 24 }} />
+      </IconButton>
+    </>
+  ) : (
+    <>
+      <Button>Login</Button> <Button>Signup</Button>{" "}
+    </>
+  );
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -166,7 +188,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: "8px" }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -205,7 +227,7 @@ export default function PrimarySearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+          {/* <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
@@ -248,8 +270,8 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
-            <p>{user.userDetail?.username}</p>
-          </Box>
+          </Box> */}
+          <Box sx={{ flexGrow: 1 }}>{loginOrUser}</Box>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
