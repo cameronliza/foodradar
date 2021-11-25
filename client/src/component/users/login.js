@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../actions/user";
 
 const Login = () => {
   const history = useHistory();
+  const user = useSelector((state) => state.user);
+  const { isAuth, userDetail } = user;
   const dispatch = useDispatch();
   const [data, setData] = useState({ email: "", password: "" });
   const handleChange = (e) => {
@@ -17,6 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     dispatch(login(data));
+
     history.push("/");
   };
   return (

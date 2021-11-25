@@ -54,7 +54,7 @@ const Profile = ({ match }) => {
         {loading ? (
           <p>...loading</p>
         ) : (
-          <Grid container spacing={1}>
+          <Grid container spacing={1} >
             <Grid item sm={3}>
               <Avatar
                 src={profile.user.avatar}

@@ -16,8 +16,13 @@ let currentState = store.getState();
 
 store.subscribe(() => {
   // keep track of the previous and current state to compare changes
-  let previousState = currentState;
+  // let previousState = currentState;
   currentState = store.getState();
+  let previousState = currentState;
+  // currentState = store.getState();
+  // const info = currentState.user.userDetail;
+  // console.log("userdetail sub", info);
+  // setAuthToken(info);
   // if the token changes set the value in localStorage and axios headers
   if (previousState.user.userDetail !== currentState.user.userDetail) {
     const info = currentState.user.userDetail;

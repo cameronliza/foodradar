@@ -24,15 +24,20 @@ export const loadUser = () => async (dispatch) => {
 
 //login user in
 export const login = (formData) => async (dispatch) => {
-  const res = await api.post("/user/login", formData, {
-    withCredentials: true,
-  });
+  try {
+    const res = await api.post("/user/login", formData, {
+      withCredentials: true,
+    });
 
-  dispatch({
-    type: "LOGIN",
-    payload: res.data,
-  });
-  dispatch(loadUser());
+    dispatch({
+      type: "LOGIN",
+      payload: res.data,
+    });
+    console.log("inside of login trying to load user");
+    dispatch(loadUser());
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const register = (formData) => async (dispatch) => {
